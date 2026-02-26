@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gita Spiritual Chatbot</title>
+</head>
+<body>
+  <h2>Ask Krishna</h2>
+  <input type="text" id="question" size="60"/>
+  <button onclick="ask()">Ask</button>
+  <p id="response"></p>
+
+  <script>
+    async function ask() {
+      const query = document.getElementById("question").value;
+      const res = await fetch("http://127.0.0.1:8000/ask", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({query})
+      });
+      const data = await res.json();
+      document.getElementById("response").innerText = data.answer;
+    }
+  </script>
+</body>
+</html>
